@@ -1,0 +1,42 @@
+%--------------------------------------------------------------------------
+% File     : NUM-ROZEK : TPTP v8.1.2.
+% Domain   : Number Theory
+% Axioms   : Number theory - Equality and Addition
+%--------------------------------------------------------------------------
+
+%-- Constants
+fof(c1, axiom, "one" = successor("zero")).
+fof(c1, axiom, "two" = successor("one")).
+fof(c1, axiom, "three" = successor("two")).
+fof(c1, axiom, "four" = successor("three")).
+fof(c1, axiom, "five" = successor("four")).
+
+%-- Equality with respect to natural numbers
+
+fof(zero, axiom,
+    ![X] : "zero" != successor(X)
+).
+
+fof(successor_equality, axiom,
+    ![A, B]: (
+        (successor(A) = successor(B)) =>
+        (A = B)
+    )
+).
+% Note: Also shows that successor is an injective function
+
+%-- Addition Axioms
+
+fof(adding_zero, axiom,
+    ![A]: add(A,"zero") = A
+).
+
+fof(addition, axiom,
+    ![A, B]:
+        (add(A,successor(B)) =
+        successor(add(A,B)))
+).
+
+
+
+%--------------------------------------------------------------------------

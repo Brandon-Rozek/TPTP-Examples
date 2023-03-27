@@ -1,0 +1,58 @@
+%--------------------------------------------------------------------------
+% File     : NUM-ROZEK : TPTP v8.1.2.
+% Domain   : Data Structures
+% Axioms   : Lists - Head, Tail, and Length
+%--------------------------------------------------------------------------
+
+%-- List Basics
+
+tff(list_t, type, list: $tType).
+
+tff(list_nil, type, nil : list).
+
+tff(list_cons, type,
+    cons: (
+        ($int * list) > list
+    )
+).
+
+%-- Head
+
+tff(head_t, type,
+    head: list > $int
+).
+
+tff(head_cons, axiom,
+    ![H: $int, T: list]: (
+        head(cons(H, T)) = H
+    )
+).
+
+%-- Tail
+
+tff(tail_t, type,
+    tail: list > list
+).
+
+tff(tail_cons, axiom,
+    ![H: $int, T: list]: (
+        tail(cons(H, T)) = T
+    )
+).
+
+% Note: The existence of head and tail definition shows that
+% cons is injective.
+
+%-- Length
+
+tff(length_t, type,
+    length: list > $int
+).
+
+tff(length_nil, axiom, length(nil) = 0).
+
+tff(length_cons, axiom,
+    ![H: $int, T: list]: (
+        length(cons(H, T)) = $sum(1, length(T))
+    )
+).
